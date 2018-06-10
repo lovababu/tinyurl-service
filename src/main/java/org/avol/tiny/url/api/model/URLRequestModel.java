@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 /**
  * Request body container class.
  *
@@ -12,8 +14,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class URLModel {
+public class URLRequestModel {
     private String originalUrl;
-    private long expiryTime;
+    private LocalDateTime expiryTime;
     private String uniqueKey;
 }

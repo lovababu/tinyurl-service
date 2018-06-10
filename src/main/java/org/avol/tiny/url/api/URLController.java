@@ -1,7 +1,7 @@
 package org.avol.tiny.url.api;
 
-import org.avol.tiny.url.api.model.ResponseBody;
-import org.avol.tiny.url.api.model.URLModel;
+import org.avol.tiny.url.api.model.URLApiResponse;
+import org.avol.tiny.url.api.model.URLRequestModel;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,12 +22,11 @@ import java.time.LocalDateTime;
 public class URLController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseBody> shorten(@RequestBody URLModel request) {
-        ResponseBody responseBody = ResponseBody.builder()
-                .shortUrl("abc")
-                .expiryTime(LocalDateTime.now().plusDays(2))
-                .build();
-        return new ResponseEntity<>(responseBody, HttpStatus.OK);
+    public ResponseEntity<URLApiResponse> shorten(@RequestBody URLRequestModel request) {
+        URLApiResponse URLApiResponse = new URLApiResponse();
+        URLApiResponse.setShortUrl("abc");
+        URLApiResponse.setExpiryTime(LocalDateTime.now().plusDays(2));
+        return new ResponseEntity<>(URLApiResponse, HttpStatus.OK);
     }
 
     @GetMapping(path = "/{uniqueKey}")

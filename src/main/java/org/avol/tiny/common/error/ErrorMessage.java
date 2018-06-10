@@ -12,4 +12,6 @@ public final class ErrorMessage {
     public static final String INVALID_URL = "Supplied URL is not a valid.";
     public static final String INVALID_EXPIRY = "Supplied Expiry time is not a valid.";
     public static final String SERVER_ERROR = "Experiencing with server error, please try later.";
+    public static final String UNSUPPORTED_MEDIA_TYPE = "Unsupported media type requested.";
+    public static final String MALFORMED_PAYLOAD = "Payload is malformed.";
 }

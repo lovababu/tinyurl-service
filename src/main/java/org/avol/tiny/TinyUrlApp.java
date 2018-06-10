@@ -3,6 +3,7 @@ package org.avol.tiny;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 /**
  *
@@ -11,7 +12,9 @@ import org.springframework.context.annotation.ComponentScan;
  * Created by lovababu on 09/06/18.
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"org.avol.tiny"})
+@ComponentScan(basePackageClasses = {
+        TinyUrlApp.class
+})
 public class TinyUrlApp {
 
     public static void main(String[] args) {

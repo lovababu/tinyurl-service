@@ -1,7 +1,7 @@
 package org.avol.tiny.url.api.model;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
  *
  * Created by lovababu on 10/06/18.
  */
-@Builder
+@Setter
 @Getter
-public class ResponseBody {
+public class URLApiResponse {
     private String shortUrl;
     private LocalDateTime expiryTime;
 }

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
  */
 @Getter
 public enum  ErrorCode {
+    UNSUPPORTED_MEDIA(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value(), ErrorMessage.UNSUPPORTED_MEDIA_TYPE),
+    PAYLOAD_INVALID(HttpStatus.BAD_REQUEST.value(), ErrorMessage.MALFORMED_PAYLOAD),
     KEY_NOT_FOUND(HttpStatus.NOT_FOUND.value(), ErrorMessage.KEY_NOT_FOUND),
     DUPLICATE_KEY(HttpStatus.CONFLICT.value(), ErrorMessage.DUPLICATE_KEY),
     INVALID_URL(HttpStatus.BAD_REQUEST.value(), ErrorMessage.INVALID_URL),

@@ -1,0 +1,16 @@
+management:
+  endpoints:
+    web:
+      base-path: /manage
+      expose: "*"
+server:
+  servlet:
+    context-path: /avol
+  port: 8080
+urlapi:
+  couchbase:
+    bootstrap-hosts:
+      - localhost
+    bucket:
+      name: default
+      password: ""
