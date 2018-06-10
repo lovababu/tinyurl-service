@@ -28,6 +28,10 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
+	compile group: 'com.couchbase.client', name: 'java-client', version: '2.5.9'
+	testCompile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'
+	testCompile group: 'info.cukes', name: 'cucumber-core', version: '1.2.5'
+	testCompile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
