@@ -100,6 +100,11 @@ public class URLStepDefs extends BaseStepDef{
         assertTrue(TestContext.shortKeys.size() == size);
     }
 
+    @Given("^invoke the redirect api with not exist key \"([^\"]*)\"$")
+    public void invoke_the_redirect_api_with_not_exist_key(String arg1) throws Throwable {
+        TestContext.responseEntity = get(EndpointUrl.REDIRECT.getResourceURL(getPort(), arg1), buildHeaders());
+    }
+
     private Object buildRequest(String url, String expiryTime, String customKey) {
         ApiRequest apiRequest = new ApiRequest();
         if (NumberUtils.isParsable(expiryTime) && NumberUtils.createLong(expiryTime) > 0) {

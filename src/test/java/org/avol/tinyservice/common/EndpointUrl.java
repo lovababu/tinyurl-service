@@ -7,7 +7,7 @@ public enum EndpointUrl {
 
     HEALTH("/manage/health"),
     SHORTEN("/urls"),
-    REDIRECT("/%s");
+    REDIRECT("/urls/%s");
 
     private final String BASE_URL = "http://localhost:%d/avol";
 

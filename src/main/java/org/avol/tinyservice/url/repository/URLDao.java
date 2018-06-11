@@ -5,6 +5,7 @@ import com.couchbase.client.java.document.RawJsonDocument;
 import com.couchbase.client.java.document.json.JsonObject;
 import com.couchbase.client.java.transcoder.JsonTranscoder;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.avol.tinyservice.common.error.ErrorCode;
 import org.avol.tinyservice.common.exception.ServiceException;
 import org.avol.tinyservice.url.repository.entity.UrlModel;
 
@@ -38,7 +39,11 @@ public interface URLDao {
 
     default UrlModel fromJsonDocument(RawJsonDocument rawJsonDocument) {
         try {
-            return mapper.readValue(rawJsonDocument.content(), UrlModel.class);
+            if (rawJsonDocument != null) {
+                return mapper.readValue(rawJsonDocument.content(), UrlModel.class);
+            } else {
+                throw new ServiceException(ErrorCode.KEY_NOT_FOUND);
+            }
         } catch (Exception e) {
             throw ServiceException.wrap(e);
         }

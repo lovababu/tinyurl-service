@@ -69,3 +69,8 @@ Feature: Tiny URL service Behavior testing
       |url                                                         |customKey|expiryTimeInMs|
       |https://www.zycus.com/solution/strategic-sourcing-suite.html|zycus2   |              |
     Then it failed with http status code 409
+
+  Scenario: as a user I wanted to shorten my long url
+    Given invoke the redirect api with not exist key "xxyyzzz"
+    Then it failed with http status code 404
+    And the response should contain  error "Either Key is invalid or expired."
