@@ -8,7 +8,9 @@ server:
     context-path: /avol
   port: 8080
 urlapi:
+  redirectBaseURL: "http://localhost:8080/avol/urls/%s"
   couchbase:
+    defaultExpiryInDays: 180
     bootstrap-hosts:
       - localhost
     bucket:
