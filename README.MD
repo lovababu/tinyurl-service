@@ -25,13 +25,13 @@
    
 ### Couchbase setup.
 
- **Windows**
+ **Windows**  
     [Please refer this link](https://developer.couchbase.com/documentation/server/current/install/install-package-windows.html)
     
  **MacOS/Linux**   
     [Docker setup](couch-docker/README.md)
 
- In case couchbase as docker container, script will take care care of setup cluster and creating default bucket.
+ In case couchbase as docker container, script will take care care of setup cluster and creating default bucket.  
  In case couchbase as standalone server, you have to setup cluster and create default bucket from the couchbase console.
 
 ### App setup.
