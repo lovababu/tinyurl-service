@@ -6,6 +6,7 @@ import org.junit.runners.JUnit4;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by lovababu on 10/06/18.
@@ -21,7 +22,7 @@ public class UniqueKeyTest {
 
     @Test
     public void testDecode() {
-        assertNotNull(UniqueKey.decode("aby0ef"));
+        assertTrue(UniqueKey.decode("http://www.zycus.com/") > 0);
     }
 
     @Test
@@ -35,10 +36,9 @@ public class UniqueKeyTest {
 
     @Test
     public void testIsEncodeReturnsExpectedString() {
-        String input = "abcdef";
+        String input = "http://www.zycus.com/";
         int decode = UniqueKey.decode(input);
         String encoded = UniqueKey.encode(decode);
-
-        assertEquals(encoded, input);
+        assertEquals("VeGER", encoded);
     }
 }

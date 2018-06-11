@@ -12,7 +12,39 @@
     - Java 1.8
     - Gradle
     - Docker
+    - couchbase server
     - Any IDE
+
+## setup and configuration
+
+### Docker setup
+
+   Required only when you are planning launch couchbase server as container.
+   
+   [Refer](https://docs.docker.com/toolbox/overview/)
+   
+### Couchbase setup.
+
+ **Windows**
+    [Please refer this link](https://developer.couchbase.com/documentation/server/current/install/install-package-windows.html)
+    
+ **MacOS/Linux**   
+    [Docker setup](couch-docker/README.md)
+
+ In case couchbase as docker container, script will take care care of setup cluster and creating default bucket.
+ In case couchbase as standalone server, you have to setup cluster and create default bucket from the couchbase console.
+
+### App setup.
+
+  [application.yml](src/main/resources/application.yml) has a default configuration, change if needed.
+
+## Build.
+
+  To build the project run ```./gradlew build```
+  
+  It creates executable jar file named ```tinyurl-service-0.0.1-SNAPSHOT.jar``` under the `build/libs` directory.
+  
+  cucmber test reports can be found in `build/reports` directory
 
 ## How to Run?
 
@@ -24,6 +56,12 @@
   jump into root directory and
   
   Run the command ```./gradlew bootRun```
+  
+### Run the executable jar file.
+
+   ```java -jar tinyurl-service-0.0.1-SNAPSHOT.jar```
+  
+  It runs the server on configured port default is 8080.
   
 ## Health check.
 
@@ -47,7 +85,7 @@ Request:
 Response:
 
     {
-        "shortUrl": "http://localhost:8080/bmapHM",
+        "shortUrl": "http://localhost:8080/avol/urls/bmapHM",
         "expiryTime": "2018-12-08T17:13:10.566"
     } 
 

@@ -1,7 +1,9 @@
 package org.avol.tinyservice.stepdefs;
 
+import com.couchbase.client.java.Bucket;
 import org.avol.tinyservice.TinyUrlApp;
 import org.avol.tinyservice.url.api.model.ApiResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -25,6 +27,9 @@ public class BaseStepDef {
     @LocalServerPort
     private int port;
 
+    @Autowired
+    private Bucket bucket;
+
     private final TestRestTemplate testRestTemplate;
 
     BaseStepDef() {
@@ -35,14 +40,14 @@ public class BaseStepDef {
         return testRestTemplate.getForEntity(url, String.class);
     }
 
-    ResponseEntity<ApiResponse> post(String url, Object body, HttpHeaders httpHeaders) {
+    ResponseEntity<String> post(String url, Object body, HttpHeaders httpHeaders) {
         HttpEntity<?> payload = new HttpEntity<>(body, httpHeaders);
-        return testRestTemplate.postForEntity(url, payload, ApiResponse.class);
+        return testRestTemplate.postForEntity(url, payload, String.class);
     }
 
-    ResponseEntity<ApiResponse> get(String url, HttpHeaders httpHeaders) {
+    ResponseEntity<String> get(String url, HttpHeaders httpHeaders) {
         HttpEntity<?> httpEntity = new HttpEntity<>(null, httpHeaders);
-        return testRestTemplate.exchange(url, HttpMethod.GET, httpEntity, ApiResponse.class);
+        return testRestTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
     }
 
     int getPort() {
@@ -51,5 +56,9 @@ public class BaseStepDef {
 
     public void setPort(int port) {
         this.port = port;
+    }
+
+    public void flushBucket() {
+        bucket.bucketManager().flush();
     }
 }

@@ -1,5 +1,6 @@
 package org.avol.tinyservice.url.service.impl;
 
+import com.couchbase.client.java.error.DocumentAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.avol.tinyservice.common.error.ErrorCode;
@@ -15,7 +16,6 @@ import java.time.Instant;
 import java.util.Optional;
 
 /**
- *
  * Business layer class.
  *
  * @author Durga, Padala on 10/06/18.
@@ -34,11 +34,12 @@ public class URLServiceImpl implements URLService {
     @Override
     public UrlModel shorten(ApiRequest requestModel) throws ServiceException {
         validateRequest(requestModel);
-        String id = StringUtils.isNotEmpty(requestModel.getCustomKey()) ? requestModel.getCustomKey()
-                : getUniqueKey(requestModel.getOriginalUrl());
+        String id = getUniqueKey(requestModel);
         UrlModel urlModel = buildPersistentModel(requestModel, defaultExpiry);
         try {
             urlDao.insert(id, urlModel);
+        } catch (DocumentAlreadyExistsException dae) {
+            throw new ServiceException(ErrorCode.DUPLICATE_KEY);
         } catch (Exception e) {
             log.error("Error", e);
             throw new ServiceException(ErrorCode.SERVER_ERROR);
@@ -63,22 +64,23 @@ public class URLServiceImpl implements URLService {
     /**
      * encode the url and verify whether it exists in datastore, if it exists append timestamp in ephoc millis to original url and retry the process.
      *
-     * @param originalUrl
-     *     url to be shortened.
-     * @return
-     *      id string.
+     * @param request api request model
+     * @return id string.
      */
-    private String getUniqueKey(String originalUrl) {
-        StringBuilder url = new StringBuilder(originalUrl);
+    private String getUniqueKey(ApiRequest request) {
+        if (StringUtils.isNotEmpty(request.getCustomKey())) {
+            return request.getCustomKey();
+        }
+        StringBuilder url = new StringBuilder(request.getOriginalUrl());
         int count = 0;
         String id;
         while (true) {
-             id =UniqueKey.encode(HashUtil.hash(url.toString()));
+            id = UniqueKey.encode(HashUtil.hash(url.toString()));
             if (urlDao.isKeyExist(id)) {
                 count++;
                 url.append(String.valueOf(Instant.now().toEpochMilli()));
             } else {
-               break;
+                break;
             }
         }
         log.info("Number iterations happend to get uniquey key {}", count);

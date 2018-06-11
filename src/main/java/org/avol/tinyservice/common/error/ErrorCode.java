@@ -26,4 +26,16 @@ public enum  ErrorCode {
         this.statusCode = statusCode;
         this.message = message;
     }
+
+    class ErrorMessage {
+
+        static final String DUPLICATE_KEY = "Key is already exist.";
+        static final String KEY_NOT_FOUND = "Either Key is invalid or expired.";
+        static final String INVALID_URL = "Supplied URL is not a valid.";
+        static final String INVALID_EXPIRY = "Supplied Expiry time is not a valid.";
+        static final String SERVER_ERROR = "Experiencing with server error, please try later.";
+        static final String UNSUPPORTED_MEDIA_TYPE = "Unsupported media type requested.";
+        static final String MALFORMED_PAYLOAD = "Payload is malformed.";
+        static final String INVALID_CUSTOM_KEY = "Supplied Custom key is not a valid.";
+    }
 }
